@@ -1,0 +1,15 @@
+{
+  "name": "biocycle",
+  "version": "1.0.0",
+  "description": "Biocycle homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Arturo, Chris, Homero",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}

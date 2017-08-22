@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const expressWs = require('express-ws');
 const winston = require('winston');
+const serveStatic = require('serve-static')
 
 const app = express();
 const ws = expressWs(app);
@@ -14,14 +15,7 @@ winston.configure({
   ]
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/resources/index.html'));
-});
-
-app.get('/resources/:file', (req, res) => {
-  winston.debug("Serving file:", req.params.file);
-  res.sendFile(path.join(__dirname + '/resources/' + req.params.file));
-});
+app.use(serveStatic(path.join(__dirname, 'public')))
 
 app.ws('/ws', (ws, req) => {
   winston.debug("Received new websocket connection.");

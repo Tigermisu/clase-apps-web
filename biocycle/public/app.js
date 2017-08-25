@@ -14,3 +14,15 @@ ws.onmessage = function (event) {
 ws.onclose = function () {
     console.warn("Web socket is closing:", ws);
 }
+
+$(document).ready(function(){
+	$("#submit").click(function(){
+		$("#actual").html($("#today").val());
+		$("#cumpleanos").html($("#birthday").val());
+})
+})
+
+//var today = new Date.parse(document.getElementById("today"));
+//var birthday = new Date.parse(document.getElementById("today"));
+
+

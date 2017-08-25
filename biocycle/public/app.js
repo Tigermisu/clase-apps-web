@@ -40,7 +40,36 @@ $(document).ready(function(){
 		$("#fisico").text('Dias del Ciclo fisico (23): ' +fisico);
 		$("#emocional").text('Dias del Ciclo Emocional (28): ' +emocional);
 		$("#intelectual").text('Dias del Ciclo Intelectual (33): ' +intelectual);
-		
+	
+		//cambia el color del ciclo fisico
+	if (3<= fisico && fisico <=9){
+		$("#fisico").css("color", "green");
+	} else if ((0<= fisico && fisico <=3)||(9<= fisico && fisico <=14)||(20<= fisico && fisico <=23)){
+		$("#fisico").css("color", "yellow");
+	} else if (14<= fisico && fisico <=20){
+		$("#fisico").css("color", "red");
+	}
+	
+	//cambia el color del ciclo emocional
+	if (3<= emocional && emocional <=11){
+		$("#emocional").css("color", "green");
+	} else if ((0<= emocional && emocional <=3)||(11<= emocional && emocional <=17)||(25<= emocional && emocional <=28)){
+		$("#emocional").css("color", "yellow");
+	} else if (17<= emocional && emocional <=25){
+		$("#emocional").css("color", "red");
+	}
+	
+	//cambia el color del ciclo intelectual
+	if (4<= intelectual && intelectual <=12){
+		$("#intelectual").css("color", "green");
+	} else if ((0<= intelectual && intelectual <=4)||(12<= intelectual && intelectual <=21)||(29<= intelectual && intelectual <=33)){
+		$("#intelectual").css("color", "yellow");
+	} else if (21<= intelectual && intelectual <=29){
+		$("#intelectual").css("color", "red");
+	}
+	
+	
+	
 })
 })
 

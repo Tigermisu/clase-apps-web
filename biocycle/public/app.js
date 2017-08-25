@@ -34,12 +34,12 @@ $(document).ready(function(){
 	console.log(intelectual);
 	console.log(emocional);
 
-		$("#actual").html($("#today").val());
-		$("#cumpleanos").html($("#birthday").val());
+		//$("#actual").html($("#today").val());
+		//$("#cumpleanos").html($("#birthday").val());
 		$("#vividos").text('Dias vividos a la fecha de calculo: ' +diffDays);
-		$("#fisico").text('Dias del Ciclo fisico (23) ' +fisico);
-		$("#emocional").text('Dias del Ciclo Emocional (28) ' +emocional);
-		$("#intelectual").text('Dias del Ciclo Intelectual (33) ' +intelectual);
+		$("#fisico").text('Dias del Ciclo fisico (23): ' +fisico);
+		$("#emocional").text('Dias del Ciclo Emocional (28): ' +emocional);
+		$("#intelectual").text('Dias del Ciclo Intelectual (33): ' +intelectual);
 		
 })
 })

@@ -57,12 +57,10 @@ ws.onclose = function () {
 	console.warn("Web socket is closing:", ws);
 }
 
-
-
 $(document).ready(function () {
 	var today = new Date(),
-		month = today.getMonth();
-	month = month.toString().length == 1 ? "0" + month: month;
+		month = today.getMonth() + 1;
+	month = month < 10 ? "0" + month: month;
 	today = today.getFullYear() + "-" + month + "-" + today.getDate();
 	$('#today').val(today);
 

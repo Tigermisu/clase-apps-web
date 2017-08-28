@@ -10,14 +10,14 @@ const ws = expressWs(app);
 log4js.configure({
   appenders: {
     out: { type: 'stdout' },
-    app: { type: 'file', filename: 'application.log' }
+    applog: { type: 'file', filename: 'application.log' }
   },
   categories: {
-    default: { appenders: [ 'out', 'app' ], level: 'debug' }
+    default: { appenders: [ 'out', 'applog' ], level: 'debug' }
   }
 });
 
-let logger = log4js.getLogger();
+let logger = log4js.getLogger('index.js');
 
 app.use(serveStatic(path.join(__dirname, 'public')))
 

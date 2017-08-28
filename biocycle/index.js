@@ -21,9 +21,30 @@ app.ws('/ws', (ws, req) => {
   winston.debug("Received new websocket connection.");
 
   ws.on('message', (msg) => {
-    // TODO - Parse MSG object, send back biocycle results
     winston.debug("Received message from WS:", msg);
-    ws.send("Hey, I got your msg: " + msg);
+    try {
+      var json = JSON.parse(msg),
+        dia1 = new Date(json.actual),
+        dia2 = new Date(json.nacimiento);
+      
+      var oneDay = 24 * 60 * 60 * 1000;
+      var diffDays = Math.round(Math.abs((dia1.getTime() - dia2.getTime()) / (oneDay)));
+      var fisico = diffDays % 23;
+      var emocional = diffDays % 28;
+      var intelectual = diffDays % 33;
+      
+      winston.debug(dia1);
+      winston.debug(dia2);
+      winston.debug(diffDays);
+      winston.debug(fisico);
+      winston.debug(intelectual);
+      winston.debug(emocional);
+
+      ws.send(JSON.stringify({diffDays: diffDays, fisico: fisico, intelectual: intelectual, emocional: emocional}));
+
+    } catch(e) {
+      winston.error("Failed to parse JSON:", e);
+    }
   });
 
   ws.on('close', () => {

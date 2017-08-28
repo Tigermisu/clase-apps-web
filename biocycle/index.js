@@ -1,27 +1,31 @@
 const express = require('express');
 const path = require('path');
 const expressWs = require('express-ws');
-const winston = require('winston');
+const log4js = require('log4js');
 const serveStatic = require('serve-static')
 
 const app = express();
 const ws = expressWs(app);
 
-winston.configure({
-  level: 'debug',
-  transports: [
-    new (winston.transports.Console)(),
-    new (winston.transports.File)({ filename: 'logs.log' })
-  ]
+log4js.configure({
+  appenders: {
+    out: { type: 'stdout' },
+    app: { type: 'file', filename: 'application.log' }
+  },
+  categories: {
+    default: { appenders: [ 'out', 'app' ], level: 'debug' }
+  }
 });
+
+let logger = log4js.getLogger();
 
 app.use(serveStatic(path.join(__dirname, 'public')))
 
 app.ws('/ws', (ws, req) => {
-  winston.debug("Received new websocket connection.");
+  logger.debug("Received new websocket connection.");
 
   ws.on('message', (msg) => {
-    winston.debug("Received message from WS:", msg);
+    logger.debug("Received message from WS:", msg);
     try {
       var json = JSON.parse(msg),
         dia1 = new Date(json.actual),
@@ -33,25 +37,25 @@ app.ws('/ws', (ws, req) => {
       var emocional = diffDays % 28;
       var intelectual = diffDays % 33;
       
-      winston.debug(dia1);
-      winston.debug(dia2);
-      winston.debug(diffDays);
-      winston.debug(fisico);
-      winston.debug(intelectual);
-      winston.debug(emocional);
+      logger.debug(dia1);
+      logger.debug(dia2);
+      logger.debug(diffDays);
+      logger.debug(fisico);
+      logger.debug(intelectual);
+      logger.debug(emocional);
 
       ws.send(JSON.stringify({diffDays: diffDays, fisico: fisico, intelectual: intelectual, emocional: emocional}));
 
     } catch(e) {
-      winston.error("Failed to parse JSON:", e);
+      logger.error("Failed to parse JSON:", e);
     }
   });
 
   ws.on('close', () => {
-    winston.debug("Websocket connection is closing down.");
+    logger.debug("Websocket connection is closing down.");
   });
 });
 
 app.listen(3000, () => {
-  winston.info('App listening on port 3000');
+  logger.info('App listening on port 3000');
 });

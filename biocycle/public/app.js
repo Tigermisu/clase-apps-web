@@ -65,10 +65,10 @@ $(document).ready(function () {
 	$('#today').val(today);
 
 	$("#submit").click(function () {
-		var dia1 = new Date(document.getElementById("today").value);
+		var name = document.getElementById("name").value;
 		var dia2 = new Date(document.getElementById("birthday").value);
 
-		ws.send(JSON.stringify({nacimiento: dia2, actual: dia1}));
+		ws.send(JSON.stringify({nacimiento: dia2, name: name}));
 
 	});
 });

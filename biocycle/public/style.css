@@ -5,6 +5,24 @@ body {
     margin: 0;
 }
 
+table thead td {
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+}
+
+table tbody {
+    background-color: #fff;
+}
+
+table tbody td {    
+    padding: 4px 8px;
+}
+
+table tbody td:nth-child(n+3) {
+    text-align: right;
+}
+
 .wrapper {
     display: flex;
     height: 100vh;
